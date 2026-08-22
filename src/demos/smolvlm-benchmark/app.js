@@ -30,7 +30,7 @@ const runner = createSmolVlmRunner({
   onStatus: (text, kind) => setStatus(text, kind),
   onWorkerReady: () => {
     workerReady = true;
-    setStatus('Worker ready.', 'ok');
+    setStatus('Trabalhador pronto.', 'ok');
     refreshButtons();
   },
   onModelReady: (msg) => {
@@ -41,13 +41,13 @@ const runner = createSmolVlmRunner({
       load_ms: msg.load_ms ?? null
     };
     setStatus(
-      `Model ready (${msg.backend || 'unknown'}${msg.dtype ? ', ' + msg.dtype : ''}).`,
+      `Modelo pronto (${msg.backend || 'unknown'}${msg.dtype ? ', ' + msg.dtype : ''}).`,
       'ok'
     );
     refreshButtons();
   },
   onWorkerError: (err) => {
-    setStatus(`Worker crashed: ${err.message || err}`, 'err');
+    setStatus(`Trabalhador crashou: ${err.message || err}`, 'err');
     refreshButtons();
   }
 });
@@ -91,7 +91,7 @@ async function blobToDataUrl(blob) {
 
 async function loadDefaultImage() {
   const res = await fetch(appConfig.defaultImageUrl, { cache: 'no-store' });
-  if (!res.ok) throw new Error('Could not load default image.');
+  if (!res.ok) throw new Error('Não foi possivel carregar imagem de teste.');
   const blob = await res.blob();
   const dataUrl = await blobToDataUrl(blob);
   currentImageDataUrl = dataUrl;
@@ -112,17 +112,17 @@ imageInput.addEventListener('change', async (event) => {
     showImage(dataUrl);
     refreshButtons();
   } catch {
-    setStatus('Could not read the image file.', 'err');
+    setStatus('Não foi possivel ler o arquivo de imagem.', 'err');
   }
 });
 
 useDefaultBtn.addEventListener('click', async () => {
   try {
-    setStatus('Loading default image...', 'busy');
+    setStatus('Carregando imagem teste...', 'busy');
     await loadDefaultImage();
-    setStatus('Default image loaded.', 'ok');
+    setStatus('Imagem teste carregada.', 'ok');
   } catch (err) {
-    setStatus(err.message || 'Could not load default image.', 'err');
+    setStatus(err.message || 'Não foi possivel carregar imagem de teste.', 'err');
   }
 });
 
@@ -132,10 +132,10 @@ loadBtn.addEventListener('click', async () => {
     modelReady = false;
     outputEl.textContent = '{}';
     refreshButtons();
-    setStatus('Loading model...', 'busy');
+    setStatus('Carregando modelo...', 'busy');
     await runner.loadModel(config);
   } catch (err) {
-    setStatus(err.message || 'Invalid JSON config.', 'err');
+    setStatus(err.message || 'Configuração JSON invalida.', 'err');
     refreshButtons();
   }
 });
@@ -143,11 +143,11 @@ loadBtn.addEventListener('click', async () => {
 analyzeBtn.addEventListener('click', async () => {
   try {
     const config = safeParseConfig();
-    if (!currentImageDataUrl) throw new Error('No image selected.');
+    if (!currentImageDataUrl) throw new Error('Nenhuma imagem selecionada.');
 
     currentRun.analyzeStartedAt = performance.now();
     outputEl.textContent = '{}';
-    setStatus('Analyzing image...', 'busy');
+    setStatus('Analizando imagem...', 'busy');
     analyzeBtn.disabled = true;
 
     const benchmarkResult = await runner.analyzeImage(config, currentImageDataUrl);
@@ -165,10 +165,10 @@ analyzeBtn.addEventListener('click', async () => {
     outputEl.textContent = JSON.stringify(resultPayload, null, 2);
 
     try {
-      setStatus('Collecting environment...', 'busy');
+      setStatus('Analizando ambiente...', 'busy');
       const environment = await collectEnvironment();
 
-      setStatus('Sending result...', 'busy');
+      setStatus('Enviando resultados...', 'busy');
 
       const submission = buildSubmission({
         project: appConfig.project,
@@ -199,15 +199,15 @@ analyzeBtn.addEventListener('click', async () => {
       });
 
       await sendSubmission(sharedConfig.apiEndpoint, submission);
-      setStatus('Done and sent.', 'ok');
+      setStatus('Feito e enviado.', 'ok');
     } catch (err) {
       console.error(err);
-      setStatus(`Done, but send failed: ${err.message || err}`, 'err');
+      setStatus(`Feito, mas o envio falhou: ${err.message || err}`, 'err');
     }
 
     refreshButtons();
   } catch (err) {
-    setStatus(err.message || 'Could not analyze image.', 'err');
+    setStatus(err.message || 'Não foi possivel analizar a imagem.', 'err');
     refreshButtons();
   }
 });

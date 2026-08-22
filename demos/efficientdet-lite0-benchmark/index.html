@@ -237,33 +237,33 @@
     <div class="card">
       <h1>EfficientDet-Lite0 Benchmark Demo</h1>
       <div class="muted tiny">
-        This is a client-side object detection experimentation. Thanks for participating!
+        Este é um experimento de detecção de objetos no lado do cliente.
       </div>
     </div>
 
     <div class="card">
-      <h2>Image</h2>
+      <h2>Imagem</h2>
       <div class="preview">
         <img id="preview" alt="Preview image" />
         <canvas id="overlay"></canvas>
-        <div id="placeholder" class="placeholder">No image selected</div>
+        <div id="placeholder" class="placeholder">Nenhuma imagem selecionada</div>
       </div>
 
       <div class="controls">
         <input id="imageInput" type="file" accept="image/*" />
-        <button id="useDefaultBtn" class="secondary" type="button">Use default image</button>
-        <button id="loadBtn" type="button">Load model</button>
-        <button id="analyzeBtn" type="button" disabled>Analyze</button>
+        <button id="useDefaultBtn" class="secondary" type="button">Usar imagem teste</button>
+        <button id="loadBtn" type="button">Carregar modelo</button>
+        <button id="analyzeBtn" type="button" disabled>Analizar</button>
       </div>
 
       <div class="status-line">
         <div id="statusDot" class="dot"></div>
-        <div id="statusText" class="muted">Starting worker...</div>
+        <div id="statusText" class="muted">Inicializando trabalhador...</div>
       </div>
     </div>
 
     <div class="card">
-      <h2>Config JSON</h2>
+      <h2>Configurações JSON</h2>
       <textarea id="configInput">
 {
   "modelAssetPath": "https://storage.googleapis.com/mediapipe-tasks/object_detector/efficientdet_lite0_uint8.tflite",
@@ -274,7 +274,7 @@
     </div>
 
     <div class="card">
-      <h2>Structured output</h2>
+      <h2>Output estruturado</h2>
       <pre id="output">{}</pre>
     </div>
   </div>

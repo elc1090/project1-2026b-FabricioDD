@@ -22,7 +22,7 @@ async function loadProcessor(config) {
   const processorId = config.processor_id || config.model_id;
   send({
     type: "STATUS",
-    text: `Loading processor: ${processorId}`,
+    text: `Carregando processador: ${processorId}`,
     kind: "busy"
   });
   processor = await AutoProcessor.from_pretrained(processorId);
@@ -34,7 +34,7 @@ async function tryLoadWebGPU(config) {
 
   send({
     type: "STATUS",
-    text: `Loading model with WebGPU: ${modelId}`,
+    text: `Carregando modelo com WebGPU: ${modelId}`,
     kind: "busy"
   });
 
@@ -56,7 +56,7 @@ async function tryLoadWasm(config) {
 
   send({
     type: "STATUS",
-    text: `Loading model with WASM/CPU fallback: ${modelId}`,
+    text: `Carregando modelo com WASM/CPU fallback: ${modelId}`,
     kind: "busy"
   });
 
@@ -115,7 +115,7 @@ async function initModel(config) {
     } catch (err) {
       send({
         type: "STATUS",
-        text: `WebGPU failed: ${err?.message || err}.`,
+        text: `WebGPU falhou: ${err?.message || err}.`,
         kind: "busy"
       });
     }
@@ -146,7 +146,7 @@ async function runInference(config, imageDataUrl) {
 
   send({
     type: "STATUS",
-    text: `Preparing prompt and image on ${backendUsed}...`,
+    text: `Preparando prompt e imagem com ${backendUsed}...`,
     kind: "busy"
   });
 
@@ -176,7 +176,7 @@ async function runInference(config, imageDataUrl) {
 
   send({
     type: "STATUS",
-    text: `Generating on ${backendUsed}...`,
+    text: `Generando com ${backendUsed}...`,
     kind: "busy"
   });
 
@@ -237,7 +237,7 @@ self.addEventListener("message", async (event) => {
 
     send({
       type: "ERROR",
-      text: `Unknown message type: ${data.type}`
+      text: `Tipo de mensagem desconhecido: ${data.type}`
     });
   } catch (err) {
     send({

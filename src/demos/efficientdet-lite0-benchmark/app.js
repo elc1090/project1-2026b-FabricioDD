@@ -43,7 +43,7 @@ const runner = createEfficientDetLite0Runner({
   onStatus: (text, kind) => setStatus(text, kind),
   onWorkerReady: () => {
     workerReady = true;
-    setStatus('Worker ready.', 'ok');
+    setStatus('Trabalhador pronto.', 'ok');
     refreshButtons();
   },
   onModelReady: (msg) => {
@@ -54,13 +54,13 @@ const runner = createEfficientDetLite0Runner({
       load_ms: msg.load_ms ?? null
     };
     setStatus(
-      `Model ready (${msg.backend || 'unknown'}${msg.dtype ? ', ' + msg.dtype : ''}).`,
+      `Modelo pronto (${msg.backend || 'unknown'}${msg.dtype ? ', ' + msg.dtype : ''}).`,
       'ok'
     );
     refreshButtons();
   },
   onWorkerError: (err) => {
-    setStatus(`Worker crashed: ${err.message || err}`, 'err');
+    setStatus(`Trabalhador crashou: ${err.message || err}`, 'err');
     refreshButtons();
   }
 });
@@ -242,18 +242,18 @@ imageInput.addEventListener('change', async (event) => {
     showImage(dataUrl);
     refreshButtons();
   } catch {
-    setStatus('Could not read the image file.', 'err');
+    setStatus('Não foi possivel ler o arquivo de imagem.', 'err');
   }
 });
 
 useDefaultBtn.addEventListener('click', async () => {
   try {
-    setStatus('Loading default image...', 'busy');
+    setStatus('Carregando imagem teste...', 'busy');
     await loadDefaultImage();
     state.currentSource = 'default';
-    setStatus('Default image loaded.', 'ok');
+    setStatus('Imagem teste carregada.', 'ok');
   } catch (err) {
-    setStatus(err.message || 'Could not load default image.', 'err');
+    setStatus(err.message || 'Não foi possivel carregar imagem de teste.', 'err');
   }
 });
 
@@ -263,13 +263,13 @@ loadBtn.addEventListener('click', async () => {
     modelReady = false;
     outputEl.textContent = '{}';
     refreshButtons();
-    openProgressModal('Loading model...');
-    setStatus('Loading model...', 'busy');
+    openProgressModal('Carregando modelo...');
+    setStatus('Carregando modelo...', 'busy');
     await runner.loadModel(config);
     closeProgressModal();
   } catch (err) {
     closeProgressModal();
-    setStatus(err.message || 'Invalid JSON config.', 'err');
+    setStatus(err.message || 'Configuração JSON invalida.', 'err');
     refreshButtons();
   }
 });
@@ -311,10 +311,10 @@ analyzeBtn.addEventListener('click', async () => {
     const detections = resultPayload.parsed_json?.detections || [];
     drawDetectionsOnPreview(detections);
 
-    updateProgressModal('Collecting environment...');
+    updateProgressModal('Analizando ambiente...');
     const environment = await collectEnvironment();
 
-    updateProgressModal('Sending result...');
+    updateProgressModal('Enviando resultados...');
     const submission = buildSubmission({
       project: demoConfig.project,
       kind: demoConfig.kind,
@@ -350,12 +350,12 @@ analyzeBtn.addEventListener('click', async () => {
     }
 
     closeProgressModal();
-    setStatus('Done and sent.', 'ok');
+    setStatus('Feito e enviado.', 'ok');
     refreshSourceControls();
   } catch (err) {
     closeProgressModal();
     console.error(err);
-    setStatus(err.message || 'Could not analyze image.', 'err');
+    setStatus(err.message || 'Não foi possivel analizar a imagem.', 'err');
     refreshButtons();
   }
 });
@@ -369,25 +369,25 @@ acceptConsentBtn.addEventListener('click', async (event) => {
   consentModal.close();
 
   try {
-    openProgressModal('Loading default image...');
+    openProgressModal('Carregando imagem teste...');
     await loadDefaultImage();
     state.currentSource = 'default';
     closeProgressModal();
-    setStatus('Default image loaded.', 'ok');
+    setStatus('Imagem teste carregada.', 'ok');
   } catch (err) {
     closeProgressModal();
     setStatus(err.message || 'Could not load default image.', 'err');
   }
   
   refreshSourceControls();
-  setStatus('Consent accepted.', 'ok');
+  setStatus('Consentimento aceito.', 'ok');
 });
 
 declineConsentBtn.addEventListener('click', (event) => {
   event.preventDefault();
   state.hasConsent = false;
   disableAllInputs();
-  setStatus('Consent is required to use the benchmark.', 'err');
+  setStatus('Consentimento é requirido para prosseguir.', 'err');
 });
 
 runner.init();

@@ -52,7 +52,7 @@ async function createDetector(config) {
 
   send({
     type: "STATUS",
-    text: "Loading MediaPipe runtime...",
+    text: "Carregando MediaPipe runtime...",
     kind: "busy",
   });
 
@@ -60,7 +60,7 @@ async function createDetector(config) {
 
   send({
     type: "STATUS",
-    text: "Loading detector model...",
+    text: "Carregando modelo...",
     kind: "busy",
   });
 
@@ -141,7 +141,7 @@ async function runInference(config, imageDataUrl) {
 
   send({
     type: "STATUS",
-    text: "Preparing image...",
+    text: "Preparando imagem...",
     kind: "busy",
   });
 
@@ -149,7 +149,7 @@ async function runInference(config, imageDataUrl) {
 
   send({
     type: "STATUS",
-    text: "Detecting objects...",
+    text: "Detectando objetos...",
     kind: "busy",
   });
 
