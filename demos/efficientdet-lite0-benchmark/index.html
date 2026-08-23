@@ -154,7 +154,21 @@
       font: 13px/1.45 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
       min-height: 140px;
     }
+    
+    label {
+      border: 0;
+      border-radius: 12px;
+      padding: 11px 14px;
+      background: var(--soft);
+      color: var(--text);
+      cursor: pointer;
+   }
 
+    input#imageInput:disabled + label {
+      cursor: not-allowed; /* Muda o cursor para aquele símbolo de "proibido" */
+      opacity: 0.7;        /* Deixa o botão meio transparente */
+      filter: blur(1px); /* Opcional: deixa o botão em tons de cinza */
+    }
     .tiny {
       font-size: 0.88rem;
     }
@@ -250,7 +264,10 @@
       </div>
 
       <div class="controls">
-        <input id="imageInput" type="file" accept="image/*" />
+        <input id="imageInput" type="file" accept="image/*" hidden>
+        <label for="imageInput">
+            Selecionar imagem
+        </label>
         <button id="useDefaultBtn" class="secondary" type="button">Usar imagem teste</button>
         <button id="loadBtn" type="button">Carregar modelo</button>
         <button id="analyzeBtn" type="button" disabled>Analizar</button>
