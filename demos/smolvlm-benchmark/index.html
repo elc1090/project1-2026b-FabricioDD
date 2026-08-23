@@ -103,6 +103,16 @@
       color: var(--text);
     }
 
+    button.copy {
+      background: var(--muted);
+    }
+
+    .flex {
+      display: flex;
+      justify-content: flex-end;
+      padding-top: 5px;
+    }
+
     button:disabled {
       opacity: 0.55;
       cursor: not-allowed;
@@ -155,7 +165,7 @@
       min-height: 140px;
     }
 
-    label {
+    label.button {
       border: 0;
       border-radius: 12px;
       padding: 11px 14px;
@@ -174,7 +184,16 @@
     <div class="card">
       <h1>Lab Móvel de SmolVLM</h1>
       <div class="muted tiny">
-        Aplicativo de navegador minimalista para testar configurações SmolVLM no celular.
+        Ferramenta para testar o modelo SmolVLM diretamente no navegador. 
+        Selecione uma imagem, carregue o modelo e execute a análise. 
+        As configurações utilizadas pelo modelo podem ser visualizadas e alteradas no campo JSON abaixo.
+      </div>
+      <div>
+        <label class="muted tiny">Selecione o modelo:</label>
+        <select id="pageSelector">
+          <option value="../smolvlm-benchmark/index.html">SmolVLM</option>
+          <option value="../efficientdet-lite0-benchmark/index.html">EfficientDet-Lite0</option>
+        </select>
       </div>
     </div>
 
@@ -187,12 +206,12 @@
 
       <div class="controls">
         <input id="imageInput" type="file" accept="image/*" hidden/>
-        <label for="imageInput">
+        <label for="imageInput" class="button">
             Selecionar imagem
         </label>
         <button id="useDefaultBtn" class="secondary" type="button">Usar imagem teste</button>
         <button id="loadBtn" type="button">Carregar modelo</button>
-        <button id="analyzeBtn" type="button" disabled>Analizar</button>
+        <button id="analyzeBtn" type="button" disabled>Analisar</button>
       </div>
 
       <div class="status-line">
@@ -205,30 +224,39 @@
       <h2>Configurações JSON</h2>
       <textarea id="configInput">
 {
-  "model_id": "HuggingFaceTB/SmolVLM-500M-Instruct",
-  "processor_id": "HuggingFaceTB/SmolVLM-500M-Instruct",
-  "load": {
-    "prefer_webgpu": true,
-    "wasm_fallback": true,
-    "webgpu_dtype": "fp16",
-    "wasm_dtype": "q4"
-  },
-  "processor": {
-    "do_image_splitting": false
-  },
-  "generation": {
-    "max_new_tokens": 48,
-    "do_sample": false,
-    "repetition_penalty": 1.1
-  },
-  "prompt": "Analyze the image and return only valid JSON with keys product_type, visible_materials, colors, style, short_description."
-}
-      </textarea>
+"model_id": "HuggingFaceTB/SmolVLM-500M-Instruct",
+"processor_id": "HuggingFaceTB/SmolVLM-500M-Instruct",
+"load": {
+  "prefer_webgpu": true,
+  "wasm_fallback": true,
+  "webgpu_dtype": "fp16",
+  "wasm_dtype": "q4"
+},
+"processor": {
+  "do_image_splitting": false
+},
+"generation": {
+  "max_new_tokens": 48,
+  "do_sample": false,
+  "repetition_penalty": 1.1
+},
+"prompt": "Analyze the image and return only valid JSON with keys product_type, visible_materials, colors, style, short_description."
+}</textarea>
+      <div class="flex">
+        <button id="copyConfigBtn" class="copy">
+          Copiar configurações
+        </button>
+      </div>
     </div>
 
     <div class="card">
       <h2>Output estruturado</h2>
       <pre id="output">{}</pre>
+      <div class="flex">
+        <button id="copyOutputBtn" class="copy">
+          Copiar output
+        </button>
+      </div>
     </div>
   </div>
 

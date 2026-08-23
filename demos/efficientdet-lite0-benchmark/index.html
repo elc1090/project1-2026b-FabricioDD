@@ -107,7 +107,17 @@
       opacity: 0.55;
       cursor: not-allowed;
     }
+    
+    button.copy {
+      background: var(--muted);
+    }
 
+    .flex {
+      display: flex;
+      justify-content: flex-end;
+      padding-top: 5px;
+    }
+    
     textarea {
       width: 100%;
       min-height: 200px;
@@ -155,7 +165,7 @@
       min-height: 140px;
     }
     
-    label {
+    label.button {
       border: 0;
       border-radius: 12px;
       padding: 11px 14px;
@@ -251,7 +261,16 @@
     <div class="card">
       <h1>EfficientDet-Lite0 Benchmark Demo</h1>
       <div class="muted tiny">
-        Este é um experimento de detecção de objetos no lado do cliente.
+        Ferramenta para testar a detecção de objetos utilizando o modelo EfficientDet-Lite0 diretamente no navegador. 
+        Primeiro carregue o modelo e analise a imagem teste. Depois da análise acabar, pode selecionar uma imagem do 
+        seu dispositivo e executar novamente para visualizar os objetos identificados.
+      </div>
+      <div>
+        <label class="muted tiny">Selecione o modelo:</label>
+        <select id="pageSelector">
+          <option value="../efficientdet-lite0-benchmark/index.html">EfficientDet-Lite0</option>
+          <option value="../smolvlm-benchmark/index.html">SmolVLM</option>
+        </select>
       </div>
     </div>
 
@@ -265,12 +284,12 @@
 
       <div class="controls">
         <input id="imageInput" type="file" accept="image/*" hidden>
-        <label for="imageInput">
+        <label for="imageInput" class="button">
             Selecionar imagem
         </label>
         <button id="useDefaultBtn" class="secondary" type="button">Usar imagem teste</button>
         <button id="loadBtn" type="button">Carregar modelo</button>
-        <button id="analyzeBtn" type="button" disabled>Analizar</button>
+        <button id="analyzeBtn" type="button" disabled>Analisar</button>
       </div>
 
       <div class="status-line">
@@ -286,13 +305,22 @@
   "modelAssetPath": "https://storage.googleapis.com/mediapipe-tasks/object_detector/efficientdet_lite0_uint8.tflite",
   "scoreThreshold": 0.5,
   "maxResults": -1
-}
-      </textarea>
+}</textarea>
+      <div class="flex">
+        <button id="copyConfigBtn" class="copy">
+          Copiar configurações
+        </button>
+      </div>
     </div>
 
     <div class="card">
       <h2>Output estruturado</h2>
       <pre id="output">{}</pre>
+      <div class="flex">
+        <button id="copyOutputBtn" class="copy">
+          Copiar output
+        </button>
+      </div>
     </div>
   </div>
 

@@ -363,6 +363,24 @@ analyzeBtn.addEventListener('click', async () => {
 disableAllInputs();
 consentModal.showModal();
 
+document.getElementById("pageSelector").addEventListener("change", function () {
+    if (this.value) {
+        window.location.href = this.value;
+    }
+});
+
+document.getElementById("copyOutputBtn").addEventListener("click", async () => {
+    const output = document.getElementById("output").textContent;
+
+    await navigator.clipboard.writeText(output);
+});
+
+document.getElementById("copyConfigBtn").addEventListener("click", async () => {
+    const config = document.getElementById("configInput").value;
+
+    await navigator.clipboard.writeText(config);
+});
+
 acceptConsentBtn.addEventListener('click', async (event) => {
   event.preventDefault();
   state.hasConsent = true;
