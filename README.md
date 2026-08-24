@@ -2,7 +2,7 @@
 # Projeto: Remake de aplicação web simples
 
 
-(./site.gif "GIF animado do projeto.")
+<img src="site.gif" alt="GIF animado do projeto.">
 
 
 ## Acesso
