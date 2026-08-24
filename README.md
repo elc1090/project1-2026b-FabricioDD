@@ -2,8 +2,6 @@
 # Projeto: Remake de aplicação web simples
 > 3. Substitua a imagem animada por um GIF/WEBP mostrando o resultado do seu projeto (o arquivo pode ser armazenado no repositório ou em URL externa). 
 > 4. Remova todas as instruções de entrega.
-> 6. Double-check: Certifique-se de que seu README.md não contenha instruções de entrega e seja visualizado corretamente ao abrir seu repositório!
-> Opcional: você pode alterar a formatação deste README, mas mantenha todas as informações solicitadas.
 
 ![Substitua a imagem ao lado por um GIF/WEBP animado mostrando seu projeto](./moho_follow_through2.gif "GIF animado do projeto. Imagem temporária de Moho Animation https://moho.lostmarble.com/products/moho-pro-special-halls-head-college")
 
@@ -11,7 +9,7 @@
 
 ## Acesso
 
-Substitua este texto pela URL para acesso ao seu app publicado. Adicione a URL também na seção "About" do seu repositório no GitHub.
+https://elc1090.github.io/project1-2026b-FabricioDD/demos/smolvlm-benchmark/index.html
 
 
 ## Desenvolvedor(a)
@@ -55,36 +53,39 @@ Também fiz com que um botão desabilitado fique borrado e levemente opaco. Quan
 ### Trechos de código
 
 - Deixar o botçao desabilitado óbvio:
+  <pre>
    input#imageInput:disabled + label {
       cursor: not-allowed; /* Muda o cursor para aquele símbolo de "proibido" */
       opacity: 0.7;        /* Deixa o botão meio transparente */
       filter: blur(1px); /*  Deixa o botão borrado */
     }
-  
-- Foi só adicionar um maldito <div>:
+  </pre>
+- Foi só adicionar um maldito div:
+  <pre><code>
     HTML:
-      <div class="card">
-        <h2>Output estruturado</h2>
-        <pre id="output">{}</pre>
-        <div class="flex">                             /* esse <div> que me refiro */
-          <button id="copyOutputBtn" class="copy">    /* Estava tentando adicionar os atributos para a classe do botão, mas só consegui fazer funcionar com o <div> */
+      &lt;div class="card">
+        &lt;h2>Output estruturado&lt;/h2>
+      &lt;pre id="output">{}&lt;/pre>
+        &lt;div class="flex">                             /* esse div que me refiro */
+          &lt;button id="copyOutputBtn" class="copy">    /* Estava tentando adicionar os atributos para a classe do botão, mas só consegui fazer funcionar com o div */
             Copiar output
-          </button>
-        </div>
-      </div>
+          &lt;/button>
+        &lt;/div>
+      &lt;/div>
     CSS:
       .flex {
         display: flex;
         justify-content: flex-end;
         padding-top: 5px;
       }
-
+   </code></pre>
 - Escondi o botão em inglês e criei o label em português
-    <input id="imageInput" type="file" accept="image/*" hidden>
-        <label for="imageInput" class="button">
+   <pre><code>
+    &lt;input id="imageInput" type="file" accept="image/*" hidden>
+        &lt;label for="imageInput" class="button">
             Selecionar imagem
-        </label>
-
+        &lt;/label>
+   &lt;/code></pre>
 ## Tecnologias
 
 ### Linguagens e afins
