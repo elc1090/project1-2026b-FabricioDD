@@ -1,10 +1,8 @@
 # project1-2026b-FabricioDD
 # Projeto: Remake de aplicação web simples
-> 3. Substitua a imagem animada por um GIF/WEBP mostrando o resultado do seu projeto (o arquivo pode ser armazenado no repositório ou em URL externa). 
-> 4. Remova todas as instruções de entrega.
 
-![Substitua a imagem ao lado por um GIF/WEBP animado mostrando seu projeto](./moho_follow_through2.gif "GIF animado do projeto. Imagem temporária de Moho Animation https://moho.lostmarble.com/products/moho-pro-special-halls-head-college")
 
+(./site.gif "GIF animado do projeto.")
 
 
 ## Acesso
