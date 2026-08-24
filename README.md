@@ -23,7 +23,7 @@ Client-side-ai-demos
 - Repositório: https://github.com/AndreaInfUFSM/client-side-ai-demos
 
 ### Descrição
-Ferramenta para testar o modelos AI diretamente no navegador. Autoria por Andrea Schwertner Charão. As configurações utilizadas pelo modelo podem ser visualizadas e alteradas no campo JSON abaixo.
+Ferramenta para testar o modelos AI para detecção de objetos diretamente no navegador. Autoria por Andrea Schwertner Charão.
 
 ## Demanda do(a) cliente
 ### Cliente
